@@ -524,8 +524,8 @@ class EdxForumScrubber(object):
         mongoRecordObj['body'] = mongoRecordObj['body'].encode('utf-8').strip();
 
         # Escape line breaks, commas, and double quotes per CSV spec
-        #mongoRecordObj['body'] = mongoRecordObj['body'].replace('"', '""')
-        mongoRecordObj['body'] = '"%s"' % mongoRecordObj['body']
+        mongoRecordObj['body'] = mongoRecordObj['body'].replace('"', '""')
+        #mongoRecordObj['body'] = '"%s"' % mongoRecordObj['body']
 
         # If present: rename field '_id' to 'forum_post_id'
         try:
