@@ -518,8 +518,7 @@ class EdxForumScrubber(object):
         '''
 
         # Escape line breaks, commas, and double quotes per CSV spec
-        mongoRecordObj['body'] = mongoRecordObj['body'].replace('"', '""')
-        mongoRecordObj['body'] = '"%s"' % mongoRecordObj['body']
+        mongoRecordObj['body'] = '\\"%s\\"' % mongoRecordObj['body']
 
         # Ensure body is UTF-8 only (again!).
         # I don't know why the encoding we do
