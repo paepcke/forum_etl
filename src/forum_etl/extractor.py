@@ -517,15 +517,15 @@ class EdxForumScrubber(object):
         :type _type: MongoRecord
         '''
 
+        # Escape line breaks, commas, and double quotes per CSV spec
+        mongoRecordObj['body'] = mongoRecordObj['body'].replace('"', '""')
+        mongoRecordObj['body'] = '"%s"' % mongoRecordObj['body']
+
         # Ensure body is UTF-8 only (again!).
         # I don't know why the encoding we do
         # in makeDict() isn't enough, but it's not.
         # Who the hell knows with these encodings:
         mongoRecordObj['body'] = mongoRecordObj['body'].encode('utf-8').strip();
-
-        # Escape line breaks, commas, and double quotes per CSV spec
-        #mongoRecordObj['body'] = mongoRecordObj['body'].replace('"', '""')
-        #mongoRecordObj['body'] = '"%s"' % mongoRecordObj['body']
 
         # If present: rename field '_id' to 'forum_post_id'
         try:
