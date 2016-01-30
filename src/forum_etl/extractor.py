@@ -113,7 +113,7 @@ class EdxForumScrubber(object):
     forumSchema['body'] = "TEXT NOT NULL" #"varchar(2500) NOT NULL"
     forumSchema['course_display_name'] =  "varchar(100) NOT NULL"
     forumSchema['created_at'] =  "datetime NOT NULL"
-    forumSchema['votes'] = "varchar(2000) NOT NULL" # "varchar(200) NOT NULL"
+    forumSchema['votes'] = "TEXT NOT NULL" # "varchar(200) NOT NULL"
     forumSchema['count'] =  "int(11) NOT NULL"
     forumSchema['down_count'] =  "int(11) NOT NULL"
     forumSchema['up_count'] =  "int(11) NOT NULL"
