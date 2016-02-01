@@ -527,9 +527,12 @@ class EdxForumScrubber(object):
         :type _type: MongoRecord
         '''
 
-        # # Escape line breaks, commas, and double quotes per CSV spec
-        # mongoRecordObj['body'] = '\\"%s\\"' % mongoRecordObj['body']
-        mongoRecordObj['body'] = mongoRecordObj['body'].replace('\n', ' ')
+        # # Deal with line breaks and commas in forum post body
+        mongoRecordObj['body'] = mongoRecordObj['body'].replace('\n', ' ').replace('\"', "'")
+        # mongoRecordObj['body'] = '"%s"' % mongoRecordObj['body']
+        # mongoRecordObj['votes'] = '"%s"' % mongoRecordObj['votes']
+        # mongoRecordObj['up'] = '"%s"' % mongoRecordObj['up']
+        # mongoRecordObj['down'] = '"%s"' % mongoRecordObj['down']
 
         # Ensure body is UTF-8 only (again!).
         # I don't know why the encoding we do
