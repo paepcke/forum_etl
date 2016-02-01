@@ -527,8 +527,9 @@ class EdxForumScrubber(object):
         :type _type: MongoRecord
         '''
 
-        # Escape line breaks, commas, and double quotes per CSV spec
-        mongoRecordObj['body'] = '\\"%s\\"' % mongoRecordObj['body']
+        # # Escape line breaks, commas, and double quotes per CSV spec
+        # mongoRecordObj['body'] = '\\"%s\\"' % mongoRecordObj['body']
+        mongoRecordObj['body'] = mongoRecordObj['body'].replace('\n', ' ')
 
         # Ensure body is UTF-8 only (again!).
         # I don't know why the encoding we do
