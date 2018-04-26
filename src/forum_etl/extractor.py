@@ -486,7 +486,11 @@ class EdxForumScrubber(object):
 
         if len(screen_name) > 0:
             screenNamePattern = re.compile(screen_name, re.IGNORECASE)
-            body = screenNamePattern.sub("<nameRedac_" + anon_screen_name + ">", body)
+            try:
+                body = screenNamePattern.sub("<nameRedac_" + anon_screen_name + ">", body)
+            except UnicodeDecodeError:
+                # Damn unicode!
+                body = screenNamePattern.sub("<nameRedac_" + anon_screen_name + ">", body.decode("utf8", "ignore"))
 
         # Trim the name of anyone in the class from the
         # post. This method currently does nothing, b/c
@@ -769,5 +773,8 @@ if __name__ == '__main__':
 #     print('Anonymize: %s. Relatable: %s. File: %s' % (args.anonymize, args.relatable, args.bson_filename))
 #     sys.exit(0)
 
-    extractor = EdxForumScrubber(args.bson_filename, allowAnonScreenName=args.relatable)
+    #*************
+    #extractor = EdxForumScrubber(args.bson_filename, allowAnonScreenName=args.relatable)
+    extractor = EdxForumScrubber(args.bson_filename, allowAnonScreenName=True)
+    #*************
     extractor.runConversion()
