@@ -216,6 +216,7 @@ class EdxForumScrubber(object):
         collection = db[self.collection_name];
 
         # Clear out any old forum entries:
+
         self.logInfo('Preparing to delete the collection ')
         collection.remove()
         self.logInfo('Deleting mongo collection completed. Will now attempt a mongo restore')
@@ -507,7 +508,7 @@ class EdxForumScrubber(object):
         # the true user_int_id:
         try:
             user_int_id = int(mongoRecordObj['forum_int_id'])
-            forum_uid = self.mydb.query('SELECT EdxPrivate.idInt2Forum(%s);' % str(user_int_id)).next()[0]
+            forum_uid = self.mydb.query('SELECT EdxPrivate.idInt2Forum(%s);' % str(user_int_id)).next()
             mongoRecordObj['forum_uid'] = forum_uid;
             del mongoRecordObj['forum_int_id']
         except KeyError:
