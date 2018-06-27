@@ -35,13 +35,14 @@ class ProfEmailGetter(object):
         for (dirpath, _, filenames) in os.walk(piazza_zip_files_parent_dir):
             zipFiles.extend(filter(lambda the_file: the_file.endswith('.zip'), 
                                    [os.path.join(dirpath,the_file) for the_file in filenames]))
-            
+        
+        outfile_fd.write('course,instructor,email,role\n')
         for the_file in zipFiles:
             [instructor_name, instructor_email, instructor_rank] = self.extract_prof_emails(the_file) #@UnusedVariable
             if instructor_name is None:
-                outfile_fd.write('%s: no instructor found\n' % os.path.basename(the_file))
+                outfile_fd.write('%s, none, none, none\n' % os.path.basename(the_file))
             else:
-                outfile_fd.write('%s: %s, %s, %s\n' % (os.path.basename(the_file),
+                outfile_fd.write('%s, %s, %s, %s\n' % (os.path.basename(the_file),
                                                        instructor_name, 
                                                        instructor_email,
                                                        instructor_rank)
