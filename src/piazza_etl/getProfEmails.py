@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 '''
 Created on Jun 26, 2018
 
@@ -36,16 +37,18 @@ class ProfEmailGetter(object):
             zipFiles.extend(filter(lambda the_file: the_file.endswith('.zip'), 
                                    [os.path.join(dirpath,the_file) for the_file in filenames]))
         
-        outfile_fd.write('course,instructor,email,role\n')
+        outfile_fd.write('course,instructor,email,role,filesize\n')
         for the_file in zipFiles:
+            file_len = os.path.getsize(the_file)
             [instructor_name, instructor_email, instructor_rank] = self.extract_prof_emails(the_file) #@UnusedVariable
             if instructor_name is None:
-                outfile_fd.write('%s, none, none, none\n' % os.path.basename(the_file))
+                outfile_fd.write('%s, none, none, none, %s\n' % (os.path.basename(the_file), file_len))
             else:
-                outfile_fd.write('%s, %s, %s, %s\n' % (os.path.basename(the_file),
-                                                       instructor_name, 
-                                                       instructor_email,
-                                                       instructor_rank)
+                outfile_fd.write('%s, %s, %s, %s, %s\n' % (os.path.basename(the_file),
+                                                       instructor_name.encode('utf-8'), 
+                                                       instructor_email.encode('utf-8'),
+                                                       instructor_rank,
+                                                       file_len)
                 )
             
         

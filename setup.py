@@ -22,7 +22,8 @@ setup(
     install_requires = ['pymysql_utils>=0.33',
 			'configparser>=3.3.0',
 			'json_to_relation>=0.4',
-			'pymongo>=2.7.1'
+			'pymongo>=2.7.1',
+                        'jsonpath-ng>=1.4.3',
 			],
     tests_require    = ['sentinels>=0.0.6', 'nose>=1.0'],
 
