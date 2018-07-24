@@ -599,7 +599,7 @@ class EdxForumScrubber(object):
 
         # Remove the trailing comma:
         createCmd = createCmd[:-1]
-        createCmd += ');'
+        createCmd += ') engine=MyISAM;'
 
         self.mydb.execute(createCmd)
 
